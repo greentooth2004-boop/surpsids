@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { createRoot } from "react-dom/client";
 import { AnimatePresence, motion } from "framer-motion";
 import { content } from "./content";
 import "./styles.css";
@@ -265,7 +266,7 @@ function App() {
         <div className="section-number">05 <span>/ 05</span></div>
         <SectionHeading
           kicker="two gifts, no wrapping required"
-          title="Because one day<br />isn't enough."
+          title={<>Because one day<br />isn't enough.</>}
           detail="Open these whenever you need a little more birthday."
         />
         <div className="gift-grid">
@@ -308,4 +309,4 @@ function App() {
   );
 }
 
-export default App;
+createRoot(document.getElementById("root")!).render(<App />);
