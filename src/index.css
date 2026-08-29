@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+:root {
+  --floral-pink: #ffd1e8;
+  --floral-rose: #ffb3d1;
+  --floral-lav: #e9c2ff;
+  --floral-lilac: #d8b4fe;
+  --floral-peach: #ffe0b3;
+  --floral-butter: #fff3b0;
+  --floral-sage: #c9f0d9;
+  --bg-deep: #2a0b3f;
+  --bg-night: #1a0726;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Quicksand", system-ui, sans-serif;
+  background: var(--bg-night);
+  color: #fff;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+/* Hide scrollbars inside scroll areas but keep scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.font-serif {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+.font-hand {
+  font-family: "Caveat", cursive;
+}
+
+/* ---------- Decorative textures ---------- */
+.grain::after {
+  content: "";
+  position: static;
+  pointer-events: none;
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 70;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(10, 0, 20, 0.55) 100%);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.float-soft { animation: floatY 5s ease-in-out infinite; }
+
+@keyframes flicker {
+  0%, 100% { transform: scaleY(1) translateY(0); opacity: 1; }
+  40% { transform: scaleY(1.12) translateY(-2px); opacity: 0.88; }
+  70% { transform: scaleY(0.92) translateY(1px); opacity: 0.96; }
+}
+.flicker { animation: flicker 0.18s ease-in-out infinite; }
+
+@keyframes drift {
+  0% { transform: translateY(-10vh) translateX(0) rotate(0); opacity: 0; }
+  10% { opacity: 0.9; }
+  100% { transform: translateY(110vh) translateX(40px) rotate(220deg); opacity: 0.2; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px 4px rgba(255, 209, 232, 0.5); }
+  50% { box-shadow: 0 0 40px 10px rgba(233, 194, 255, 0.7); }
+}
+.pulse-glow { animation: pulseGlow 2.4s ease-in-out infinite; }
+
+@keyframes glitchShift {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3px, 1px); }
+  40% { transform: translate(3px, -2px); }
+  60% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+.glitch { animation: glitchShift 0.25s steps(2) infinite; }
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes spinSlow {
+  to { transform: rotate(360deg); }
+}
+.spin-slow { animation: spinSlow 22s linear infinite; }
+
+@keyframes smoke {
+  0% { transform: translateY(0) scale(1); opacity: 0.7; }
+  100% { transform: translateY(-60px) scale(2.4); opacity: 0; }
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.text-glow {
+  text-shadow: 0 0 24px rgba(255, 209, 232, 0.6), 0 0 48px rgba(233, 194, 255, 0.35);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--floral-rose), var(--floral-lilac));
+  color: #3a0d3f;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.85rem 2rem;
+  box-shadow: 0 8px 30px rgba(255, 179, 209, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-soft, .flicker, .glitch, .spin-slow, .pulse-glow,
+  .cat-blink, .cat-tail, .cat-ear {
+    animation: none !important;
+  }
+}
+
+@keyframes catBlink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+.cat-blink { transform-origin: center; animation: catBlink 4s ease-in-out infinite; }
+
+@keyframes catTail {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(18deg); }
+}
+.cat-tail { transform-origin: 20px 70px; animation: catTail 2.6s ease-in-out infinite; }
+
+@keyframes catEar {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-6deg); }
+}
+.cat-ear { transform-origin: 30px 28px; animation: catEar 3.2s ease-in-out infinite; }
+
+@keyframes heartFloat {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-40px) scale(1.1); opacity: 0; }
+}
+.heart-float { animation: heartFloat 1.6s ease-out forwards; }
